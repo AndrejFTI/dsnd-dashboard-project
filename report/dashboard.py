@@ -1,4 +1,4 @@
-from fasthtml import FastHTML
+from fasthtml import FastHTML, serve
 from fasthtml.common import *
 import matplotlib.pyplot as plt
 
@@ -282,7 +282,7 @@ def team(id: str):
 
 
 # Keep the below code unchanged!
-@app.get('/update_dropdown{r}')
+@app.get('/update_dropdown')
 def update_dropdown(r):
     dropdown = DashboardFilters.children[1]
     print('PARAM', r.query_params['profile_type'])
@@ -303,4 +303,11 @@ async def update_data(r):
     elif profile_type == 'Team':
         return RedirectResponse(f"/team/{id}", status_code=303)
 
-serve(app)
+import argparse
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--port', type=int, default=5001)
+    args = parser.parse_args()
+
+    serve(app, port=args.port)
