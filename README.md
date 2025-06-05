@@ -27,6 +27,7 @@ The data that feeds into the dashboard includes:
 ## Testing
 
 If you make any changes, make sure to run the following (which also runs automatically using GitHub Actions): `pytest tests/test_employee_events.py`
+
 ---
 
 ## Repository Structure
