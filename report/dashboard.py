@@ -1,4 +1,4 @@
-from fasthtml import FastHTML, serve
+#from fasthtml import FastHTML, serve
 from fasthtml.common import *
 import matplotlib.pyplot as plt
 
@@ -9,6 +9,8 @@ from employee_events.team import Team
 
 # import the load_model function from the utils.py file
 from report.utils import load_model
+
+print("dashboard.py is being imported")
 
 """
 Below, we import the parent classes
@@ -48,7 +50,7 @@ class ReportDropdown(Dropdown):
         # call the employee_events method
         # that returns the user-type's
         # names and ids
-        return model.employee_events()
+        return model.names()
 
 
 # Create a subclass of base_components/BaseComponent
@@ -82,7 +84,8 @@ class LineChart(MatplotlibViz):
 
         # User the pandas .set_index method to set
         # the date column as the index
-        df = df.set_index('date')
+
+        df = df.set_index('event_date')
 
         # Sort the index
         df = df.sort_index()
@@ -109,7 +112,7 @@ class LineChart(MatplotlibViz):
         # method
         # Use keyword arguments to set 
         # the border color and font color to black. 
-        self.set_axis_styling(ax, border_color='black', font_color='black')
+        self.set_axis_styling(ax, bordercolor='black', fontcolor='black')
 
         # Set title and labels for x and y axis
         ax.set_title("Event Counts Over Time")
@@ -168,7 +171,7 @@ class BarChart(MatplotlibViz):
         # pass the axis variable
         # to the `.set_axis_styling`
         # method
-        self.set_axis_styling(ax, border_color='black', font_color='black')
+        self.set_axis_styling(ax, bordercolor='black', fontcolor='black')
 
         return fig
 
@@ -232,7 +235,8 @@ class Report(CombinedComponent):
 
 
 # Initialize a fasthtml app 
-app = FastHTML()
+#app = FastHTML()
+app,rt = fast_app()
 
 # Initialize the `Report` class
 report = Report()
@@ -303,11 +307,9 @@ async def update_data(r):
     elif profile_type == 'Team':
         return RedirectResponse(f"/team/{id}", status_code=303)
 
-import argparse
+#serve(app, port=5002)
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--port', type=int, default=5001)
-    args = parser.parse_args()
-
-    serve(app, port=args.port)
+if __name__ == "__main__":
+    import uvicorn
+    print("Starting app...")
+    uvicorn.run("report.dashboard:app", host="0.0.0.0", port=5002, reload=False)

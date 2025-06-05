@@ -43,10 +43,10 @@ class MatplotlibViz(BaseComponent):
 
     @matplotlib2fasthtml
     def build_component(self, entity_id, model):
-        return self.visualization(entity_id, model)
+        return self.visualization(model, entity_id)
     
     
-    def visualization(self, entity_id, model):
+    def visualization(self, model, entity_id):
         pass
 
     def set_axis_styling(self, ax, bordercolor='white', fontcolor='white'):

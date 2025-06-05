@@ -31,7 +31,7 @@ class Employee(QueryBase):
         # This query should return the data
         # for all employees in the database
         query = """
-            SELECT first_name || ' ' || last_name AS full_name, id
+            SELECT first_name || ' ' || last_name AS full_name, employee_id AS id
             FROM employee;
         """
         return self.query(query)
@@ -53,7 +53,7 @@ class Employee(QueryBase):
         query = f"""
             SELECT first_name || ' ' || last_name AS full_name
             FROM employee
-            WHERE id = {id};
+            WHERE employee_id = {id};
         """
         return self.query(query)
 
@@ -72,8 +72,8 @@ class Employee(QueryBase):
         return self.pandas_query(f"""
             SELECT SUM(positive_events) positive_events,
                    SUM(negative_events) negative_events
-            FROM {self.name}
+            FROM employee
             JOIN employee_events
-                USING({self.name}_id)
-            WHERE {self.name}.{self.name}_id = {id}
+                USING(employee_id)
+            WHERE employee.employee_id = {id}
         """)

@@ -28,7 +28,7 @@ class Team(QueryBase):
         # from the team table for all teams
         # in the database
         query = """
-            SELECT team_name, id
+            SELECT team_name, team_id
             FROM team;
         """
         return self.query(query)
@@ -50,7 +50,7 @@ class Team(QueryBase):
         query = f"""
             SELECT team_name
             FROM team
-            WHERE id = {id};
+            WHERE team_id = {id};
         """
         return self.query(query)
 
@@ -71,10 +71,10 @@ class Team(QueryBase):
                 SELECT employee_id,
                        SUM(positive_events) AS positive_events,
                        SUM(negative_events) AS negative_events
-                FROM {self.name}
-                JOIN employee_events
-                    USING({self.name}_id)
-                WHERE {self.name}.{self.name}_id = {id}
+                FROM employee_events
+                JOIN employee
+                    USING(employee_id)
+                WHERE employee.employee_id = {id}
                 GROUP BY employee_id
             );
         """)
