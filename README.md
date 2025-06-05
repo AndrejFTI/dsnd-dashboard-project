@@ -16,7 +16,7 @@ The data that feeds into the dashboard includes:
 ## Installation
 
 1. Clone this repository: `git clone https://github.com/AndrejFTI/dsnd-dashboard-project`
-2. Go into the repository: `cd <repository-directory>`
+2. Go into the repository: `cd dsnd-dashboard-project/`
 3. Create and activate a virtual environment: `python -m venv venv` and then `venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
 5. From project root, run: `python -m report.dashboard`
