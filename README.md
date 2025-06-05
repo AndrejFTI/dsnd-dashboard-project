@@ -37,6 +37,7 @@ Additionally, your team has a history of deploying dashboards using the **FastHT
 ---
 
 ### Repository Structure
+```
 ├── README.md
 ├── assets
 │   ├── model.pkl
@@ -70,7 +71,7 @@ Additionally, your team has a history of deploying dashboards using the **FastHT
 ├── start
 ├── tests
    └── test_employee_events.py
-
+```
 
 ---
 
